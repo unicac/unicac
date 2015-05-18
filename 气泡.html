@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>^_^</title>
+<link type="text/css" href="http://unicac.sinaapp.com/demo/css/g.css" rel="stylesheet" media="all">
+<script src="http://libs.baidu.com/jquery/2.0.3/jquery.js"></script>
+<style type="text/css">
+html, body {
+	height: 100%;
+  	padding: 0;
+  	margin: 0;
+	background: linear-gradient(to bottom, #87e0fd 0%,#53cbf1 40%,#05abe0 100%); /* W3C */
+}
+
+.bubbles {
+	height: 100%;
+    position: relative;
+}
+
+.bubble {
+	display: block;
+  	position: absolute;
+  	left: 0;
+  	bottom: 0;
+  	background: white;
+  	-webkit-transform: translate3d(0, 0, 0);
+    -webkit-animation: bubble 7s linear 0s infinite;
+}
+
+ @-webkit-keyframes bubble {
+     0% {
+         -webkit-transform: translateY(0);
+     }
+
+     100% {
+         -webkit-transform: translateY(-700px);
+         opacity: 0;
+     }
+
+ }
+</style>
+</head>
+
+<body>
+
+<div class="bubbles"></div>
+
+<script type="text/javascript">
+var config = {
+    radius: [5, 18],
+    interval: [500, 800],
+    lifetime: 10000,
+    template: '<span class="bubble"></span>',
+    parentNode: '.bubbles'
+};
+
+var parentNode = $(config.parentNode);
+
+setInterval(function() {
+    var bubble = $(config.template);
+    var size = Math.ceil(Math.random() * (config.radius[1] - config.radius[0]) + config.radius[0]);
+    var xOffset = (Math.ceil(Math.random() * 94) + 3);
+    xOffset = xOffset * window.innerWidth / 100;
+    var opacity = Math.random();
+
+
+    bubble.css({
+        width: size + 'px',
+        height: size + 'px',
+        opacity: opacity,
+        'border-radius': size + 'px',
+        'left': xOffset + 'px'
+    });
+
+    bubble.appendTo(parentNode);
+
+    setTimeout(function() {
+        bubble.remove();
+    },config.lifetime);
+}, Math.random() * (config.interval[1] - config.interval[0]) + config.interval[0]);
+</script>
+</body>
+</html>
